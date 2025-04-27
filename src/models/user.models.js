@@ -37,7 +37,7 @@ const userSchama = new Schema(
             type: String,//cloudinary url
             require: true,
         },
-        cover: {
+        coverImage: {
             type: String,//cloudinary url
         },
         password: {
@@ -60,7 +60,7 @@ userSchama.pre("save", async function (next) {
 userSchama.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
-userSchama.methodgenerateAccessToken=async function(){
+userSchama.methods.generateAccessToken=async function(){
     return jwt.sign(
         {
             _id:this.id,
@@ -71,11 +71,11 @@ userSchama.methodgenerateAccessToken=async function(){
         },
         process.env.SECRET_TOKEN,
         {
-            _expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
         }
     )
 }
-userSchama.method.generateRefreshToken=async function(){
+userSchama.methods.generateRefreshToken=async function(){
     return jwt.sign(
         {
             _id:this.id,
@@ -83,7 +83,7 @@ userSchama.method.generateRefreshToken=async function(){
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-            _expiresIn:process.env.REFRESH_TOKEN_SECRET_EXPIRY
+            expiresIn:process.env.REFRESH_TOKEN_SECRET_EXPIRY
         }
     )
 }
