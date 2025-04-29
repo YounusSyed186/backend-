@@ -41,10 +41,10 @@ userRouter.route("/current-user").get(verifyJWT, getCurrentUser);
 userRouter.route("/update-details").patch(verifyJWT, updateAccountDetails);
 userRouter
   .route("/update-avatar")
-  .patch(verifyJWT, upload.single("/avatar"), updateUserAvatar);
+  .patch(verifyJWT, upload.single("avatar"), updateUserAvatar);
 userRouter
   .route("/update-cover-image")
-  .patch(verifyJWT, upload.single("/coverImage"), updateUserCoverImage);
+  .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage);
 userRouter.route("/c/:userName").get(verifyJWT, getUserChanalProfile);
 userRouter.route("watch-history").get(verifyJWT, getWatchHistory);
 
